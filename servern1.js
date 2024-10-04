@@ -1,7 +1,10 @@
 import express from 'express'
 
 const app = express()
+
 app.use(express.json())
+
+
 const puerto = 3000
 
 let usuarios = [{
@@ -14,19 +17,28 @@ app.get('/usuario',(req, res) =>{
 res.json(usuarios)
 })
 
-app.post('/usuarios',(req, res)=>{
+app.post('/usuario',(req, res)=>{
     console.log(req.body)
+
+
+    const newUser  = { ...req.body, id: usuarios.length +1 }
+
+usuarios.push(newUser);
+res.send('Se ha creado un usuario');
 });
 
-app.put('/usuarios',(req, res)=>{
-    console.log(req.body)})
+app.put('/usuario',(req, res)=>{
+    console.log(req.body)
+})
 
     app.delete ('/usuarios',(req, res)=>{
         console.log(req.body)
     })
 
-const newUser={...req.body, id:usuarios.length +1}
+
 
 app.listen(puerto,()=>{ 
 console.log(`Hola${puerto}`)
+
 })
+
